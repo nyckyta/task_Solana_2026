@@ -1,0 +1,32 @@
+[toolchain]
+anchor_version = "0.30.1"
+
+[features]
+seeds = true
+skip-lint = false
+
+[programs.devnet]
+resource_manager = "CUH9R6iQXnhU78fn1FZWD9NQxweYtGbEH29y1PCr1ZLN"
+magic_token = "9ZjvRoFpEJ77XTX8sJWneBz1XLeYE9M5MHkDfer52L5i"
+item_nft = "7h34th7JokUSqF7ewdC6E8rU4R7qxQBtmX2naM5tgqkX"
+search = "7wdTuafbSRJETjnBtoeSZy4fNWGA3VDWQxNYjSSB12zp"
+crafting = "GJftT2Kndy75ktGJtJu4ti6X65ovHeDqwb1U3BV4Ncfp"
+marketplace = "A5tgKAc9BTqyemxXSsieX3eijcAWEBcoLALSVvuyyQWX"
+
+[programs.localnet]
+resource_manager = "CUH9R6iQXnhU78fn1FZWD9NQxweYtGbEH29y1PCr1ZLN"
+magic_token = "9ZjvRoFpEJ77XTX8sJWneBz1XLeYE9M5MHkDfer52L5i"
+item_nft = "7h34th7JokUSqF7ewdC6E8rU4R7qxQBtmX2naM5tgqkX"
+search = "7wdTuafbSRJETjnBtoeSZy4fNWGA3VDWQxNYjSSB12zp"
+crafting = "GJftT2Kndy75ktGJtJu4ti6X65ovHeDqwb1U3BV4Ncfp"
+marketplace = "A5tgKAc9BTqyemxXSsieX3eijcAWEBcoLALSVvuyyQWX"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "Devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"

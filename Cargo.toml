@@ -1,0 +1,29 @@
+[workspace]
+members = [
+    "programs/resource_manager",
+    "programs/magic_token",
+    "programs/item_nft",
+    "programs/search",
+    "programs/crafting",
+    "programs/marketplace",
+]
+resolver = "2"
+
+[workspace.dependencies]
+anchor-lang = { version = "0.30.1", features = ["init-if-needed"] }
+anchor-spl = { version = "0.30.1", features = ["token_2022", "token_2022_extensions", "associated_token"] }
+spl-token-2022 = { version = "3.0", features = ["no-entrypoint"] }
+spl-token-metadata-interface = { version = "0.3" }
+mpl-token-metadata = { version = "4.1" }
+
+[profile.release]
+overflow-checks = true
+lto = "fat"
+opt-level = 3
+incremental = false
+codegen-units = 1
+
+[profile.release.build-override]
+opt-level = 3
+incremental = false
+codegen-units = 1
