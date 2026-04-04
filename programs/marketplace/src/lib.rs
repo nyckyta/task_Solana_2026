@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 use anchor_spl::{
     associated_token::AssociatedToken,
     token::{self, Token, TokenAccount, Transfer},
-    token_interface::{self, TokenInterface, InterfaceAccount},
+    token_interface::{self, TokenInterface},
 };
 use item_nft::{
     cpi::{accounts::BurnItem, burn_item},
@@ -68,7 +68,7 @@ pub mod marketplace {
     /// 2. Transfer the NFT from seller to buyer.
     /// 3. Mint MagicTokens to the seller (price amount).
     /// 4. Close the Listing PDA (rent reclaimed by seller).
-    pub fn buy_item(ctx: &Context<BuyItem>) -> Result<()> {
+    pub fn buy_item(ctx: Context<BuyItem>) -> Result<()> {
         let price = ctx.accounts.listing.price;
         let authority_bump = ctx.accounts.config.marketplace_authority_bump;
         let authority_seeds: &[&[u8]] = &[b"marketplace_authority", &[authority_bump]];
@@ -314,6 +314,7 @@ pub struct BuyItem<'info> {
         payer = buyer,
         associated_token::mint = item_mint,
         associated_token::authority = buyer,
+        associated_token::token_program = spl_token_program,
     )]
     pub buyer_item_ata: Box<Account<'info, TokenAccount>>,
 

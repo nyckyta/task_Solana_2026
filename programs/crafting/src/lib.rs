@@ -61,7 +61,7 @@ pub mod crafting {
     ///   [mint_0, player_ata_0, mint_1, player_ata_1, mint_2, player_ata_2,  -- resource mints/ATAs
     ///    item_mint, item_player_ata, metadata, master_edition,               -- NFT accounts
     ///    sysvar_instructions, token_metadata_program]
-    pub fn craft_item(ctx: Context<CraftItem>, item_type: u8) -> Result<()> {
+    pub fn craft_item<'info>(ctx: Context<'_, '_, '_, 'info, CraftItem<'info>>, item_type: u8) -> Result<()> {
         let recipe = recipe_for(item_type).ok_or(CraftingError::InvalidItemType)?;
         let n = recipe.types.len();
 

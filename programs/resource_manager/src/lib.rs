@@ -131,8 +131,8 @@ pub mod resource_manager {
     /// Mint resources to a player. Only callable by the search program via CPI.
     ///
     /// remaining_accounts layout: [mint_0, player_ata_0, mint_1, player_ata_1, ...]
-    pub fn mint_resources(
-        ctx: Context<MintResources>,
+    pub fn mint_resources<'info>(
+        ctx: Context<'_, '_, '_, 'info, MintResources<'info>>,
         resource_types: Vec<u8>,
         amounts: Vec<u64>,
     ) -> Result<()> {
@@ -186,8 +186,8 @@ pub mod resource_manager {
     /// Burn resources from a player. Only callable by the crafting program via CPI.
     ///
     /// remaining_accounts layout: [mint_0, player_ata_0, mint_1, player_ata_1, ...]
-    pub fn burn_resources<'a>(
-        ctx: &Context<'a, BurnResources<'a>>,
+    pub fn burn_resources<'info>(
+        ctx: Context<'_, '_, '_, 'info, BurnResources<'info>>,
         resource_types: Vec<u8>,
         amounts: Vec<u64>,
     ) -> Result<()> {
@@ -334,7 +334,6 @@ pub struct MintResources<'info> {
     pub token_program: Interface<'info, TokenInterface>,
     pub associated_token_program: Program<'info, AssociatedToken>,
     pub system_program: Program<'info, System>,
-    pub remaining_accounts: [mint_0, player_ata_0, ...]
 }
 
 #[derive(Accounts)]
@@ -352,7 +351,6 @@ pub struct BurnResources<'info> {
     pub game_config: Account<'info, GameConfig>,
 
     pub token_program: Interface<'info, TokenInterface>,
-    pub remaining_accounts: [mint_0, player_ata_0, ...]
 }
 
 // ─── State ───────────────────────────────────────────────────────────────────

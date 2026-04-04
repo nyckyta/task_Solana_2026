@@ -34,7 +34,7 @@ pub mod search {
     /// - Enforces a 60-second on-chain cooldown per player.
     /// - Derives 3 pseudo-random resource types using the SlotHashes sysvar.
     /// - Mints the resources via CPI to resource_manager.
-    pub fn search_resources(ctx: Context<SearchResources>) -> Result<()> {
+    pub fn search_resources<'info>(ctx: Context<'_, '_, '_, 'info, SearchResources<'info>>) -> Result<()> {
         let clock = Clock::get()?;
         let now = clock.unix_timestamp;
 
